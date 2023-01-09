@@ -5,4 +5,34 @@
 
 body{
   background: #0D0D0D;
+  font-family: arial,"Microsoft JhengHei","微軟正黑體",sans-serif !important;
+}
+
+input.loginInput {
+  /*border-bottom-width: 2px !important;
+    border-bottom-color: #EAB226 !important;*/
+    border-bottom: 3px solid transparent;
+    border-image: linear-gradient(to right, #265eea 0%, #6bedfb 100%);
+    border-image-slice: 1;
+    box-sizing: border-box !important;
+    border-width: 0px 0px 2px 0px;
+    background-color: black;
+}
+input.loginInput:focus{
+  outline: none;
+}
+input.loginInput::placeholder{
+  text-align: center; 
+  opacity: 0.8;
+  animation: flickerAnimation 1s infinite ;
+}
+
+
+@keyframes flickerAnimation {
+  0%   { opacity:1; }
+  50%  { opacity:0; }
+  100% { opacity:1; }
+}
+@keyframes fadeIn { 
+  from { opacity: 0; } 
 }
