@@ -16,6 +16,7 @@ export const AuthProvider = ({children}) =>{
   const [currentUser , setCurrentUser] = useState(null)
 
   const login = (phone, username,userdata) => {
+    console.log(phone, username,userdata)
     setLoginPending(true);
     setLoginSuccess(false);
     setLoginError(null);
@@ -53,7 +54,7 @@ export const AuthProvider = ({children}) =>{
 // fake login
 const fetchLogin = (phone, username,userdata, callback) => 
   setTimeout(() => {
-    if (phone === userdata.phone && username === userdata,name) {
+    if (phone === userdata.phone && username === userdata.name) {
       return callback(null);
     } else {
       return callback(new Error('Invalid email and password'));

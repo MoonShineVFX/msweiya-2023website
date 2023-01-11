@@ -8,7 +8,7 @@ import { motion } from "framer-motion"
 import {getAllUsers} from '../Helper/getfunction'
 const initialState = {
   phone: '',
-  usernamename: ''
+  username: ''
 }
 function Login() {
   const [usersData ,setUsersData] = useState()
@@ -26,7 +26,11 @@ function Login() {
     event.preventDefault()
     const [ phone] = event.target.elements
     console.log(phone.value)
-    login(phone, user.name,user;
+    login(phone.value, user.name,user);
+    setState({
+      phone: '',
+
+    });
  
   }
   const handleChange = (value) =>{
@@ -41,7 +45,7 @@ function Login() {
   }
   const searchUserfromDatabase = (value)=>{
     var findLike = usersData.find(function(item, index, array){
-      return item.phone === value;  // 取得陣列 like === '蘿蔔泥'
+      return item.phone === value;  
     });
     if(!findLike){
       setUser({});  
@@ -87,7 +91,6 @@ function Login() {
                 placeholder="手機號碼"
                 className="form-control loginInput text-sm w-full tex-center pb-1 text-center"
                 onChange={(e)=>{handleChange(e.target.value)}}
-                value={state.phone} 
               />
             </div>
             {

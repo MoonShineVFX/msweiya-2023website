@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
 
 import {Navigate, Outlet} from 'react-router-dom'
-import { AuthContext } from "../Auth";
+import { AuthContext } from "../Front/PlayAuthContext";
+import Login from '../Front/Login';
+import PublicPageLayout from '../Layouts/PublicPageLayout';
 const useAuth=()=>{
   const user = useContext(AuthContext);
   console.log(user.currentUser)
@@ -13,10 +15,12 @@ const useAuth=()=>{
 }
 
 const  PublicRoutes=() =>{
+  const { state } = useContext(AuthContext);
+  if (!state.isLoggedIn) 
+    return <Login />;
+  else
+    return <PublicPageLayout><Outlet/></PublicPageLayout>  
 
-  const auth=useAuth()
-
-  return auth?<Navigate to="/admin"/>: <Outlet/>
 }
 
 export default PublicRoutes;

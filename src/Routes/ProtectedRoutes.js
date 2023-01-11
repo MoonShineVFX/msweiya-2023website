@@ -1,7 +1,7 @@
 import React, { useContext }  from 'react';
 
 import {Navigate, Outlet} from 'react-router-dom'
-import { AuthContext } from "../Auth";
+import { AuthContext } from "../Front/PlayAuthContext";
 import DashboardPageLayout from '../Layouts/DashboardPageLayout';
 const useAuth=()=>{
   const user = useContext(AuthContext);
