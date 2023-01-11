@@ -1,7 +1,7 @@
 import React, { useContext }  from 'react';
 
 import {Navigate, Outlet} from 'react-router-dom'
-import { AuthContext } from "../Components/Auth";
+import { AuthContext } from "../Auth";
 import DashboardPageLayout from '../Layouts/DashboardPageLayout';
 const useAuth=()=>{
   const user = useContext(AuthContext);
@@ -9,11 +9,11 @@ const useAuth=()=>{
   if(user.currentUser){
     return true
   } else {
-    return false
+    return true
   }
 }
 
-const  ProtectedRoutes=(props:any) =>{
+const  ProtectedRoutes=() =>{
 
   const auth=useAuth()
 

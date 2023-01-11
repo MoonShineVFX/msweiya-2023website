@@ -9,7 +9,13 @@ const storage = getStorage();
 /** 
 * User
 **/
-
+export const getAllUsers = async (callback) =>{
+  const q = query(collection(db, "users"), where("display", "==", '1'))
+  const data = await getDocs(q);
+  mapDataWithUid(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
+    callback(res)
+  })
+}
 
 
 

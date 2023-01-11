@@ -1,6 +1,6 @@
 import React from 'react'
 import {Outlet} from 'react-router-dom';
-import AdminNavbar from '../Pages/Back/Components/AdminNavbar';
+import AdminNavbar from '../Back/Components/AdminNavbar';
 import { RecoilRoot } from 'recoil';
 function DashboardPageLayout() {
   return (
