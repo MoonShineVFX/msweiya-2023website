@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import {getUserByPhone , updateUserCoinByPhone, getAllGame} from '../Helper/getfunction'
-import {useSpring,animated} from 'react-spring'
+import { Link  } from "react-router-dom";
 import AnimatedNumbers from "react-animated-numbers";
 //loading
 import {LoadingAnim} from '../Helper/HtmlComponents'
@@ -49,6 +49,9 @@ function Home() {
               <div className="flex items-center">
                 <AnimatedNumbers
                   animateToNumber={data.coin}
+                  fontStyle={{
+                    color: '#fffedd'
+                  }}
                   includeComma={true}
                   configs={(number, index) => {
                     return { mass: 1, tension: 230 * (index + 1), friction: 140 };
@@ -65,11 +68,13 @@ function Home() {
         {
           gameData ?
           gameData.map((item,index)=>{
-            const {title,player,multiple_choice,enable} = item
+            const {title,player,multiple_choice,enable,uid} = item
             return(
-              <div className='p-5 rounded-lg border-2 my-4 bg-cover bg-no-repeat bg-center'
-              style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/images/card.jpeg'})`}}
+              <div 
+                className='p-5 rounded-lg border-2 my-4 bg-cover bg-no-repeat bg-center cursor-pointer'
+                style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/images/card.jpeg'})`}}
               >
+                <Link to={'/watchgame/:userphone/:uid'}>
                 <div 
                   className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-xl' 
                   >{title}</div>
@@ -79,6 +84,7 @@ function Home() {
                   <div className='flex'>狀態:  {enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
                   <div className='border px-1'> 觀看下注情形 </div>
                 </div>
+                </Link>
                 
               </div>
             )

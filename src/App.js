@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { BrowserRouter , Routes, Route} from 'react-router-dom';
+import { HashRouter,BrowserRouter , Routes, Route} from 'react-router-dom';
 import ProtectedRoutes from './Routes/ProtectedRoutes'
 import PublicRoutes from "./Routes/PublicRoutes";
 import EmptyPageLayout from "./Layouts/EmptyPageLayout";
@@ -12,7 +12,7 @@ import AdminHome from './Back/Home'
 function App() {
   return (
     <AuthProvider>
-      <BrowserRouter>
+      <HashRouter>
         <Routes>
             
             
@@ -26,7 +26,7 @@ function App() {
             
             
         </Routes>
-      </BrowserRouter>
+      </HashRouter>
     </AuthProvider>
   );
 }
