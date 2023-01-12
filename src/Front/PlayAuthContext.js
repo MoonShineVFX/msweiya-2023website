@@ -1,5 +1,6 @@
 import React,{useState,useEffect} from 'react'
 import { useSetState } from 'react-use';
+import { Navigate } from "react-router-dom";
 export const AuthContext = React.createContext(null);
 const initialState = {
   isLoggedIn: false,
@@ -55,8 +56,11 @@ export const AuthProvider = ({children}) =>{
 const fetchLogin = (phone, username,userdata, callback) => 
   setTimeout(() => {
     if (phone === userdata.phone && username === userdata.name) {
+      window.localStorage.setItem('username',username)
+      window.localStorage.setItem('phone',phone)
+      window.localStorage.setItem('permission',userdata.permission)
       return callback(null);
     } else {
-      return callback(new Error('Invalid email and password'));
+      return callback(new Error('查無此人，輸入錯誤'));
     }
   }, 1000);

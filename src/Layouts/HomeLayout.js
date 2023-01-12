@@ -3,9 +3,11 @@ import { Navigate,Outlet} from 'react-router-dom';
 import { AuthContext } from "../Front/PlayAuthContext";
 
 
-function EmptyPageLayout() {
+function HomeLayout() {
   const { state } = useContext(AuthContext);
-
+  if (!state.isLoggedIn) {
+    return <Navigate to="/login" />;
+  }
 
 
 
@@ -17,4 +19,4 @@ function EmptyPageLayout() {
   )
 }
 
-export default EmptyPageLayout
+export default HomeLayout

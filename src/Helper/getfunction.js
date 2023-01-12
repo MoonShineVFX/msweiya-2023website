@@ -1,6 +1,6 @@
 // firebase 資料庫連線
 import db from '../firebaseConfig/firebase'
-import {collection, query,  getDocs,orderBy,where,limit,limitToLast,startAfter,endBefore,addDoc,deleteDoc,doc,updateDoc} from "firebase/firestore"
+import {collection, query,onSnapshot,  getDocs,orderBy,where,limit,limitToLast,startAfter,endBefore,addDoc,deleteDoc,doc,updateDoc} from "firebase/firestore"
 import { getStorage, ref, getDownloadURL,  } from "firebase/storage";
 import { async } from '@firebase/util';
 const storage = getStorage();
@@ -15,6 +15,21 @@ export const getAllUsers = async (callback) =>{
   mapDataWithUid(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
     callback(res)
   })
+}
+//由id取得單筆玩家
+export const getUserByPhone = async (phone,callback)=>{
+  const q = query(collection(db, "users"),where("phone", "==", phone))
+ 
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      callback(doc.data())
+    })
+  })
+  // const data = await getDocs(q);
+  // data.forEach((doc) => {
+  //   const docData = doc.data()
+  //   callback(doc.data())
+  // });
 }
 
 

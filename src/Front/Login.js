@@ -61,6 +61,7 @@ function Login() {
     })
 
 
+
   },[])
 
 
@@ -102,9 +103,12 @@ function Login() {
                 transition={{ duration :0.5 }}
                 className="text-center text-sm">您好！歡迎歸來  {user.name} 大人 </motion.div>
             }
+            <div className="text-center text-sm text-zinc-400">
             { isLoginPending && <div>請等待一下...</div> }
             { isLoggedIn && <div>準備著陸！.</div> }
             { loginError && <div>{loginError.message}</div> }
+            </div>
+ 
             
             <button
               className="py-3 px-4  text-white w-full rounded-full text-sm tracking-wider my-10 hover:brightness-110"
