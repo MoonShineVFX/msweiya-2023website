@@ -22,7 +22,7 @@ export const getUserByPhone = async (phone,callback)=>{
  
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((doc) => {
-      callback(doc.data())
+      callback({...doc.data(),uid:doc.id})
     })
   })
   // const data = await getDocs(q);
@@ -31,7 +31,19 @@ export const getUserByPhone = async (phone,callback)=>{
   //   callback(doc.data())
   // });
 }
+//增加積分
+export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
 
+  const q = doc(db, 'users',uid)
+  console.log(uid)  
+  try {
+    await updateDoc( q ,currentData)
+    callback('success')
+  } catch (error) {
+    callback(error)
+  }
+}
+//減少積分
 
 
 

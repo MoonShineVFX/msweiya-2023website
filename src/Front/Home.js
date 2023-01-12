@@ -1,21 +1,28 @@
 import React,{useEffect,useState} from 'react'
-import {getUserByPhone} from '../Helper/getfunction'
+import {getUserByPhone , updateUserCoinByPhone} from '../Helper/getfunction'
 import {useSpring,animated} from 'react-spring'
 import AnimatedNumbers from "react-animated-numbers";
 
-function Number({n}){
-  const {number} = useSpring({
-    from: {number:0},
-    number:n,
-    delay:200,
-    config:{mass:1,tension:20,friction:20}
-  });
-  return <animated.div>{number.to((n)=>n.toFixed(0))}</animated.div>
-}
 
 function Home() {
   const phone = window.localStorage.getItem('phone')
   const [data ,setData] = useState(null)
+
+  const handleClick = () =>{
+
+    let currentdata = {
+      "coin" : data.coin +100
+    } 
+    console.log(data,currentdata)
+    updateUserCoinByPhone(data.uid,currentdata,function(res){
+      console.log(res)
+    })
+    
+
+    
+    
+  }
+
   useEffect(()=>{
     getUserByPhone(phone,function(res){
       console.log(res)
@@ -36,7 +43,7 @@ function Home() {
               <div>積分資產：</div> 
               <div className="flex items-center">
                 <AnimatedNumbers
-                  animateToNumber={parseInt(data.coin)}
+                  animateToNumber={data.coin}
                   includeComma={true}
                   configs={(number, index) => {
                     return { mass: 1, tension: 230 * (index + 1), friction: 140 };
@@ -47,6 +54,7 @@ function Home() {
             
           </div>
       }
+      <button className='border p-2 my-4' onClick={handleClick}> TEST +100積分(當玩家下注贏錢時，增加積分到資料庫)</button>
     </div>
   )
 }
