@@ -31,7 +31,7 @@ export const getUserByPhone = async (phone,callback)=>{
   //   callback(doc.data())
   // });
 }
-//增加積分
+//改變積分
 export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
 
   const q = doc(db, 'users',uid)
@@ -43,9 +43,21 @@ export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
     callback(error)
   }
 }
-//減少積分
+// 建立新遊戲賽局
+// 讀取遊戲賽局
+export const getAllGame = async (callback) =>{
+  const q = query(collection(db, "game"), where("display", "==", '1'))
+  const data = await getDocs(q);
+  mapDataWithUid(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
+    callback(res)
+  })
+}
+// 編輯
+// 刪除
 
+// 建立下注
 
+// 輸贏選項
 
 /**
  * 取5筆資料
