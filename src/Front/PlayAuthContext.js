@@ -59,6 +59,7 @@ const fetchLogin = (phone, username,userdata, callback) =>
       window.localStorage.setItem('username',username)
       window.localStorage.setItem('phone',phone)
       window.localStorage.setItem('permission',userdata.permission)
+      window.localStorage.setItem('user_uid',userdata.uid)
       return callback(null);
     } else {
       return callback(new Error('查無此人，輸入錯誤'));

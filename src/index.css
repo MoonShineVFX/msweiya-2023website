@@ -18,7 +18,7 @@ input.loginInput {
     border-width: 0px 0px 2px 0px;
     background-color: black;
 }
-input.loginInput:focus{
+input:focus{
   outline: none;
 }
 input.loginInput::placeholder{
@@ -35,4 +35,14 @@ input.loginInput::placeholder{
 }
 @keyframes fadeIn { 
   from { opacity: 0; } 
+}
+
+input.gameNumber{
+  border-bottom: 3px solid transparent;
+  border-image: linear-gradient(to right, #eacd26 0%, #fbe16b 100%);
+  border-image-slice: 1;
+  box-sizing: border-box !important;
+  border-width: 0px 0px 2px 0px;
+  background-color: black;
+  text-align: center; 
 }

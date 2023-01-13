@@ -1,6 +1,6 @@
 // firebase 資料庫連線
 import db from '../firebaseConfig/firebase'
-import {collection, query,onSnapshot,  getDocs,orderBy,where,limit,limitToLast,startAfter,endBefore,addDoc,deleteDoc,doc,updateDoc} from "firebase/firestore"
+import {collection, query,onSnapshot,  getDocs,orderBy,where,limit,limitToLast,startAfter,endBefore,addDoc,deleteDoc,doc,updateDoc,getDoc,arrayUnion} from "firebase/firestore"
 import { getStorage, ref, getDownloadURL,  } from "firebase/storage";
 import { async } from '@firebase/util';
 const storage = getStorage();
@@ -35,7 +35,6 @@ export const getUserByPhone = async (phone,callback)=>{
 export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
 
   const q = doc(db, 'users',uid)
-  console.log(uid)  
   try {
     await updateDoc( q ,currentData)
     callback('success')
@@ -52,12 +51,54 @@ export const getAllGame = async (callback) =>{
     callback(res)
   })
 }
+export const getGameByUid = async (uid,callback)=>{
+  const q = doc(db , 'game' , uid)
+  const docSnap = await getDoc(q);
+  callback(docSnap.data())
+}
+//由id取得單筆賽局
+export const getGameByGameUid = async (u_title,callback)=>{
+  const q = query(collection(db, "game"),where("u_title", "==", u_title))
+ 
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      callback({...doc.data(),uid:doc.id})
+    })
+  })
+  // const data = await getDocs(q);
+  // data.forEach((doc) => {
+  //   const docData = doc.data()
+  //   callback(doc.data())
+  // });
+}
 // 編輯
 // 刪除
 
-// 建立下注
+// 紀錄下注
+export const updatedGameBetsByGameUid = async (uid,currentData,callback)=>{
+  const docRef = doc(db ,"game", uid)
+  try{
+    await updateDoc(docRef, {
+      gambles_list: arrayUnion(currentData)
+    });
+  }catch(error){
+
+  }
+}
 
 // 輸贏選項
+
+
+
+
+
+
+
+
+//以上是尾牙api
+//以上是尾牙api
+//以上是尾牙api
+
 
 /**
  * 取5筆資料
