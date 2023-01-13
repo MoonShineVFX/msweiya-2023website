@@ -37,7 +37,7 @@ function WatchChart() {
   return (
     <div className='text-white  w-10/12 mx-auto my-10'>
       <div className='text-center'>
-          <div className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-2xl' >{gameData.title}</div>
+          <div className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-2xl' >{gameData && gameData.title}</div>
           <div className='text-xl font-extrabold'>即時下注回饋圖</div> 
           <div className='text-zinc-400'>有點即時 又不太即時 </div>
         </div>
