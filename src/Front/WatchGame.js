@@ -15,8 +15,8 @@ function WatchGame() {
   const {userData} = useOutletContext()
   const [data , setData] = useState(null)
   const [currentUserBet , setCurrentUserBet] = useState(0)
-  const [isCanBet , setIsCanBet] = useState(true)
-  const { register, handleSubmit, watch,setValue,getValues,control, formState: { errors } } = useForm({ defaultValues:{
+  const [isCanBet , setIsCanBet] = useState(false)
+  const { register, handleSubmit, watch,setValue,getValues,control,reset, formState: { errors } } = useForm({ defaultValues:{
     pay_moneyA:0,
     pay_moneyB:0,
     pay_moneyC:0,
@@ -66,6 +66,38 @@ function WatchGame() {
     }
     
   }
+  
+  const handleChange = (e,code_name) => {
+    let value = e.target.value
+    let code_group = ["A","B","C","D","E","F","G"]
+    code_group.splice(code_group.indexOf(code_name),1)
+    // console.log(new_group)
+    if(singleGame.multiple_choice === "0"){
+      console.log('這是單選題')
+      const obj = {};
+      code_group.forEach((item)=>{
+        obj['pay_money'+item] = 0;
+      })
+      reset(obj)
+
+      if(value > singleGame.pay_limit){
+        setValue("pay_money"+code_name, singleGame.pay_limit)
+      } else if (value < 0) {
+        setValue("pay_money"+code_name, 0)
+      }
+
+    }
+    else{
+      if(value > singleGame.pay_limit){
+        setValue("pay_money"+code_name, singleGame.pay_limit)
+      } else if (value < 0) {
+        setValue("pay_money"+code_name, 0)
+      }
+    }
+
+
+    
+  }
 
   useEffect(()=>{
       if(!gameuid) return
@@ -96,7 +128,7 @@ function WatchGame() {
             <div 
             className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-xl' 
             >{data.title}</div>
-            <div className='text-sm text-blu'>{data.multiple_choice === "1" ?  " 可複選下注" : " 單選下注"}</div>
+            <div className='text-sm text-amber-100'>{data.multiple_choice === "1" ?  " 可分散下注" : " 單選下注"}</div>
             
           </div>
 
@@ -110,9 +142,9 @@ function WatchGame() {
             <div className='flex text-sm gap-5 mt-10  justify-center'>
               <div className='flex'> 現在{data.enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
               <div>單項下注上限 {data.pay_limit} 籌碼</div>
-              <div>你已下注 {currentUserBet} 籌碼</div>
+              {/* <div>你已下注 {currentUserBet} 籌碼</div> */}
             </div>
-            { isCanBet === true && <div className='text-rose-300 text-sm my-2'>拍謝，再點就超過超過下注限制了唷</div>}
+            { isCanBet && <div className='text-rose-300 text-sm my-2'>拍謝，再點就超過超過下注限制了唷</div>}
             <div className='p-5 rounded-lg border-2 my-4'>
               <form onSubmit={handleSubmit(onSubmit)} >
               {
@@ -137,12 +169,24 @@ function WatchGame() {
                             min="0" 
                             maxLength={singleGame.pay_limit}
                             {...register('pay_money'+item.code_name )}
+                            onChange={(e)=> {handleChange(e,item.code_name)}}
+                            
                           />
                           <input type="button" value="-" className=' w-8 bg-zinc-300 text-zinc-600  text-lg' 
                             onClick={()=>{
                               const values = getValues("pay_money"+item.code_name)
+                              let code_group = ["A","B","C","D","E","F","G"]
+                              if(singleGame.multiple_choice === "0"){
+                                console.log('這是單選題')
+                                const obj = {};
+                                code_group.forEach((item)=>{
+                                  obj['pay_money'+item] = 0;
+                                })
+                                reset(obj)
+                              }
                               if(values !== 0 ){
                                 setValue("pay_money"+item.code_name, parseInt(values)-1)
+                                
                               }else{
                                 setValue("pay_money"+item.code_name, 0)
                               }
@@ -151,8 +195,17 @@ function WatchGame() {
                           <input type="button" value="+" className=' w-8 bg-zinc-300 text-zinc-600 rounded-r-md text-lg border-l border-zinc-500' 
                             onClick={()=>{
                               const values = getValues("pay_money"+item.code_name)
-                              if(!isCanBet){
-
+                              let code_group = ["A","B","C","D","E","F","G"]
+                              if(singleGame.multiple_choice === "0"){
+                                console.log('這是單選題')
+                                const obj = {};
+                                code_group.forEach((item)=>{
+                                  obj['pay_money'+item] = 0;
+                                })
+                                reset(obj)
+                              }
+                              if(values >singleGame.pay_limit-1){
+                                setValue("pay_money"+item.code_name, singleGame.pay_limit)
                               }else{
                                 setValue("pay_money"+item.code_name, parseInt(values)+1)
                               }
@@ -178,11 +231,15 @@ function WatchGame() {
                 })
 
               }
-              <button type="submit" 
-              className="py-1 px-2 text-white w-1/2 rounded-md text-base tracking-wider my-3 "
-              style={{background: `linear-gradient(to top, #574a00 0%, #e5a533 100%)`}} >
-                      下好離手
-              </button>
+              <div>
+                <button type="submit" 
+                className="py-1 px-2 text-white w-1/2 rounded-md text-base tracking-wider my-3 "
+                style={{background: `linear-gradient(to top, #574a00 0%, #e5a533 100%)`}} >
+                        下好離手
+                </button>
+                <div className='text-xs text-zinc-200'>要確耶</div>
+              </div>
+
              </form>
             </div>
 
