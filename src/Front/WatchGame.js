@@ -4,11 +4,34 @@ import { getGameByUid,updatedGameBetsByGameUid,updateUserCoinByPhone} from '../H
 import PlusMinusInput from './Components/PlusMinusInput';
 import UserInfo from './Components/UserInfo';
 import {useOutletContext} from 'react-router-dom'
+import { useForm,useWatch } from 'react-hook-form';
+import { FaFlagCheckered } from "react-icons/fa";
+import { useRecoilState, useRecoilValue } from 'recoil';
+import { gameState } from '../Back/atoms/fromTypes';
 function WatchGame() {
   const user_phone = window.localStorage.getItem('phone')
+  const singleGame = useRecoilValue(gameState);
   const {gameuid} = useParams();
-  const [data , setData] = useState(null)
   const {userData} = useOutletContext()
+  const [data , setData] = useState(null)
+  const [currentUserBet , setCurrentUserBet] = useState(0)
+  const [isCanBet , setIsCanBet] = useState(true)
+  const { register, handleSubmit, watch,setValue,getValues,control, formState: { errors } } = useForm({ defaultValues:{
+    pay_moneyA:0,
+    pay_moneyB:0,
+    pay_moneyC:0,
+    pay_moneyD:0,
+    pay_moneyE:0,
+    pay_moneyF:0,
+    pay_moneyG:0,
+    pay_moneyH:0,
+  }});
+
+
+
+  const onSubmit = (data) => {
+    console.log(data)
+  }
   const handleInputClick = (items) => {
     let currentData = {
       "user_phone": user_phone,
@@ -27,14 +50,41 @@ function WatchGame() {
     })
 
   }
-  useEffect(()=>{
-    if(!gameuid) return
+  const checkBetCoinLimit = (item) =>{
+    const itemValues =  Object.values(item) 
+    const itemReduse = itemValues.reduce((a,b) => parseInt(a)  + parseInt(b) )
 
-    getGameByUid(gameuid,function(res){
-      setData(res)
-    })
+    if(!itemReduse ){
+      return
+    } else if(itemReduse > singleGame.pay_limit){
+      console.log('超過下注限制金額')
+      setIsCanBet(false)
+    } else{
+      setIsCanBet(true)
+      setCurrentUserBet(itemReduse)
+      
+    }
+    
+  }
+
+  useEffect(()=>{
+      if(!gameuid) return
+
+      getGameByUid(gameuid,function(res){
+        setData(res)
+        console.log(res)
+      })
+      // const watchAll = watch((value, { name, type }) => {
+
+      //     if(checkBetCoinLimit){
+      //       checkBetCoinLimit(value)
+      //     }
+      // });
+      // return () => watchAll.unsubscribe();
+
 
   },[])
+
   return (
     <div className='text-white w-11/12 mx-auto my-4'>
       <UserInfo userData={userData}/>
@@ -42,13 +92,11 @@ function WatchGame() {
         data &&
         
         <div>
-          <div className='flex justify-between my-4 items-end border-b border-zinc-400 pb-4'>
+          <div className='flex flex-col justify-between my-4 items-center border-b border-zinc-400 pb-4'>
             <div 
             className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-xl' 
             >{data.title}</div>
-            <div>{data.multiple_choice === "1" ?  " 可複選下注" : " 單選下注"}</div>
-            <div>上限 {data.pay_limit}</div>
-            <div className='flex'> {data.enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
+            <div className='text-sm text-blu'>{data.multiple_choice === "1" ?  " 可複選下注" : " 單選下注"}</div>
             
           </div>
 
@@ -57,17 +105,87 @@ function WatchGame() {
             <div>
               <div className='text-xl font-extrabold'>下注區</div> 
               <div className='text-zinc-400'>謹慎博弈 小賭怡情 大賭傷身 </div>
+
             </div>
-            {
-              data.player.map((item,index)=>{
-                return(
-                  <div className='p-5 rounded-lg border-2 my-4 bg-cover bg-no-repeat bg-center cursor-pointer' key={'game'+index}>
-                    <div>挑戰者: <span className='text-lg font-bold'>{item.code_name}</span></div>
-                    <PlusMinusInput  player={item.code_name} handleInputClick={handleInputClick}/>
-                  </div>
-                )
-              })
-            }
+            <div className='flex text-sm gap-5 mt-10  justify-center'>
+              <div className='flex'> 現在{data.enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
+              <div>單項下注上限 {data.pay_limit} 籌碼</div>
+              <div>你已下注 {currentUserBet} 籌碼</div>
+            </div>
+            { isCanBet === true && <div className='text-rose-300 text-sm my-2'>拍謝，再點就超過超過下注限制了唷</div>}
+            <div className='p-5 rounded-lg border-2 my-4'>
+              <form onSubmit={handleSubmit(onSubmit)} >
+              {
+                data.player.map((item,index)=>{
+                  return(
+                     <div className=' text-sm  my-4 ' key={'input'+item.code_name}>
+                       <div className='flex gap-2 items-center justify-center'>
+                        <label htmlFor={'pay_money'+item.code_name} className="flex flex-col pr-3 items-start" >
+                          <span className='text-xs text-zinc-300'>挑戰者</span> 
+                          <div className='flex items-center'>
+                            <FaFlagCheckered className='mr-2' size="12"  color="#e5b849"/> 
+                            <span className='text-lg'> {item.code_name}</span>
+                          </div>
+                          
+                        
+                        </label>
+                       
+                        <div className='flex '>
+
+                          <input type="number" 
+                            className=" shadow appearance-none border rounded-l-md text-center text-zinc-800 bg-gray-200 " 
+                            min="0" 
+                            maxLength={singleGame.pay_limit}
+                            {...register('pay_money'+item.code_name )}
+                          />
+                          <input type="button" value="-" className=' w-8 bg-zinc-300 text-zinc-600  text-lg' 
+                            onClick={()=>{
+                              const values = getValues("pay_money"+item.code_name)
+                              if(values !== 0 ){
+                                setValue("pay_money"+item.code_name, parseInt(values)-1)
+                              }else{
+                                setValue("pay_money"+item.code_name, 0)
+                              }
+                            }}
+                          />
+                          <input type="button" value="+" className=' w-8 bg-zinc-300 text-zinc-600 rounded-r-md text-lg border-l border-zinc-500' 
+                            onClick={()=>{
+                              const values = getValues("pay_money"+item.code_name)
+                              if(!isCanBet){
+
+                              }else{
+                                setValue("pay_money"+item.code_name, parseInt(values)+1)
+                              }
+                             
+                              
+                              
+                            }}
+                          />
+                          
+                        </div>
+                       
+                       </div>
+                       <div className='border-b border-dotted border-zinc-500 w-1/2 mx-auto my-4'></div>
+                        
+                        
+                        
+                     </div>
+                     
+                  
+                     
+                   
+                  )
+                })
+
+              }
+              <button type="submit" 
+              className="py-1 px-2 text-white w-1/2 rounded-md text-base tracking-wider my-3 "
+              style={{background: `linear-gradient(to top, #574a00 0%, #e5a533 100%)`}} >
+                      下好離手
+              </button>
+             </form>
+            </div>
+
           </div>
         </div>
 

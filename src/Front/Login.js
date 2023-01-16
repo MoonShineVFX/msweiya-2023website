@@ -81,7 +81,7 @@ function Login() {
           exit={{ opacity: 0 }}
           transition={{ duration :0.5 }}
           className="text-white h-[70vh] flex justify-center items-center">
-          <img src={process.env.PUBLIC_URL+'images/logo02.png'} alt="" />
+          <img src={process.env.PUBLIC_URL+'images/logo03.png'} alt="" />
         </motion.div>
         <div className="text-white">
           <div className="text-zinc-300">請輸入陽間的手機號碼登入世界</div>

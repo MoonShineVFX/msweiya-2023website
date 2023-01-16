@@ -6,12 +6,15 @@ import UserInfo from './Components/UserInfo';
 import {useOutletContext} from 'react-router-dom'
 //loading
 import {LoadingAnim} from '../Helper/HtmlComponents'
+import { useRecoilState } from 'recoil';
+import { gameState } from '../Back/atoms/fromTypes';
 
 function Home() {
   const phone = window.localStorage.getItem('phone')
   const [data ,setData] = useState(null)
   const [gameData ,setGameData] = useState()
   const {userData} = useOutletContext()
+  const [singleGame, setSingleGame] = useRecoilState(gameState);
 
   const handleClick = () =>{
 
@@ -49,7 +52,10 @@ function Home() {
                 className='p-5 rounded-lg border-2 my-4 bg-cover bg-no-repeat bg-center cursor-pointer'
                 style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/images/card.jpeg'})`}}
               >
-                <Link to={'/watchgame/' +uid }>
+                <Link to={'/watchgame/' +uid } 
+                  onClick={()=>{
+                    setSingleGame(item)
+                  }}>
                 <div 
                   className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-xl' 
                   >{title}</div>

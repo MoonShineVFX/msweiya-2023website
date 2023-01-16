@@ -57,8 +57,8 @@ export const getGameByUid = async (uid,callback)=>{
   callback(docSnap.data())
 }
 //由id取得單筆賽局
-export const getGameByGameUid = async (u_title,callback)=>{
-  const q = query(collection(db, "game"),where("u_title", "==", u_title))
+export const getGameByGameTitle = async (u_title,callback)=>{
+  const q = query(collection(db, "game"),where("u_title", "===", u_title))
  
   const unsubscribe = onSnapshot(q, (querySnapshot) => {
     querySnapshot.forEach((doc) => {

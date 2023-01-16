@@ -13,16 +13,18 @@ function UserInfo({userData}) {
             <div className='flex justify-between'>
               <div>積分資產：</div> 
               <div className="flex items-center gap-1">
-                <AnimatedNumbers
+                {/* <AnimatedNumbers
                   animateToNumber={userData.coin}
                   fontStyle={{
                     color: '#fffedd'
                   }}
                   includeComma={true}
                   configs={(number, index) => {
-                    return { mass: 1, tension: 230 * (index + 1), friction: 140 };
+                    return { mass: 1, tension: 1000 * (index + 1), friction: 140 };
                   }}
-                ></AnimatedNumbers>  coin</div>
+                ></AnimatedNumbers>  */}
+               {userData.coin}
+                coin</div>
             </div>
             
             

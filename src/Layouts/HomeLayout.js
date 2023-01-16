@@ -2,7 +2,7 @@ import React,{useEffect,useContext,useState} from 'react'
 import { Navigate,Outlet} from 'react-router-dom';
 import { AuthContext } from "../Front/PlayAuthContext";
 import {getUserByPhone} from '../Helper/getfunction'
-
+import { RecoilRoot } from 'recoil';
 function HomeLayout() {
   const { state } = useContext(AuthContext);
   const phone = window.localStorage.getItem('phone')
@@ -11,7 +11,6 @@ function HomeLayout() {
 
   useEffect(()=>{
     getUserByPhone(phone,function(res){
-      console.log(res)
       setUserData(res)
     })
   },[])
@@ -24,7 +23,10 @@ function HomeLayout() {
 
   return (
     <React.Fragment>
-      <Outlet context={{userData}} />
+      <RecoilRoot>
+        <Outlet context={{userData}} />
+      </RecoilRoot>
+
     </React.Fragment>
   )
 }

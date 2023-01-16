@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react'
 import { useParams, Link } from 'react-router-dom';
-import { getGameByGameUid} from '../Helper/getfunction'
+import { getGameByGameTitle} from '../Helper/getfunction'
 function WatchChart() {
   const [gameData , setGameData] = useState(null)
-  const {gameuid} = useParams();
+  const {gameu_title} = useParams();
   const [totalData , setTotalData] = useState(null)
   
   const first = (data)=>{
@@ -26,9 +26,9 @@ function WatchChart() {
   }
 
   useEffect(()=>{
-    if(!gameuid) return
+    if(!gameu_title) return
 
-    getGameByGameUid(gameuid,function(res){
+    getGameByGameTitle(gameu_title,function(res){
       setGameData(res)
       console.log(res)
       first(res)
