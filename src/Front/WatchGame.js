@@ -27,8 +27,6 @@ function WatchGame() {
     pay_moneyH:0,
   }});
 
-
-
   const onSubmit = (data) => {
     console.log(data)
   }
