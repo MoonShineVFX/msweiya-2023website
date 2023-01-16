@@ -31,6 +31,7 @@ function WatchGame() {
     console.log(data)
   }
   const handleInputClick = (items) => {
+    //需要拆出單項 再記錄到下注單
     let currentData = {
       "user_phone": user_phone,
       "pay_coin": items.pay_money,
