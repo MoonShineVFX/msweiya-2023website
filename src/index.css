@@ -46,3 +46,12 @@ input.gameNumber{
   background-color: black;
   text-align: center; 
 }
+
+.card-5 {
+  box-shadow: 0 19px 38px rgba(0,0,0,0.60), 0 15px 12px rgba(0,0,0,0.40);
+}
+.text6 {
+  text-shadow: 0 13.36px 8.896px #483d2c, 0 -2px 1px #ffffae;
+ letter-spacing: -4px;
+ color: #b39d6f;
+}

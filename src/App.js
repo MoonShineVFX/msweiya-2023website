@@ -10,6 +10,7 @@ import Home from "./Front/Home";
 import WatchGame from "./Front/WatchGame";
 import WatchChart from "./Front/WatchChart";
 import TopRich from "./Front/TopRich";
+import Awwward from "./Front/Awwward";
 
 //bank
 import BankLayout from "./Layouts/BankLayout";
@@ -41,6 +42,7 @@ function App() {
             <Route path="rich" >
               <Route path="" element={<TopRich />} />
             </Route>
+            <Route path="award" element={<Awwward />} />
             
         </Routes>
       </HashRouter>

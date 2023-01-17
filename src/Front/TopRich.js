@@ -49,7 +49,7 @@ function TopRich() {
     const interval = setInterval(()=>{
       fetchData()
       console.log('更新！')
-    },3000)
+    },5000)
 
     return ()=> clearInterval(interval)
   },[currentList])

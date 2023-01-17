@@ -29,7 +29,3 @@ export const adminAwardState = atom({
   key: 'adminAwardState',
   default: null,
 });
-export const adminServiceState = atom({
-  key: 'adminServiceState',
-  default: null,
-});
