@@ -9,7 +9,12 @@ import Login from "./Front/Login";
 import Home from "./Front/Home";
 import WatchGame from "./Front/WatchGame";
 import WatchChart from "./Front/WatchChart";
+
+
+//bank
+import BankLayout from "./Layouts/BankLayout";
 import AdminHome from './Back/Home'
+import AdminGame from './Back/GameList'
 
 function App() {
   return (
@@ -26,6 +31,10 @@ function App() {
             </Route>
             <Route path="login"  element={ <PublicRoutes/>}>
               <Route path="" element={<Login />} />
+            </Route>
+            <Route path="bank" element={<BankLayout />}>
+              <Route path="" element={<AdminHome />} />
+              <Route path="game" element={<AdminGame />} />
             </Route>
             
             

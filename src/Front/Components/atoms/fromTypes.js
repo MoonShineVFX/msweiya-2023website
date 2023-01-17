@@ -10,8 +10,8 @@ export const userState = atom({
   key: 'userState',
   default: null,
 });
-export const workState = atom({
-  key: 'workState',
+export const gameState = atom({
+  key: 'gameState',
   default: null,
 });
 

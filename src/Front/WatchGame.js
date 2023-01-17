@@ -7,7 +7,7 @@ import {useOutletContext} from 'react-router-dom'
 import { useForm,useWatch } from 'react-hook-form';
 import { FaFlagCheckered } from "react-icons/fa";
 import { useRecoilState, useRecoilValue } from 'recoil';
-import { gameState } from '../Back/atoms/fromTypes';
+import { gameState } from './Components/atoms/fromTypes';
 function WatchGame() {
   const user_phone = window.localStorage.getItem('phone')
   const singleGame = useRecoilValue(gameState);
@@ -164,13 +164,14 @@ function WatchGame() {
                         <div className='flex '>
 
                           <input type="number" 
-                            className=" shadow appearance-none border rounded-l-md text-center text-zinc-800 bg-gray-200 " 
+                            className=" shadow appearance-none border rounded-l-md text-right text-zinc-800 bg-gray-200 py-1  text-lg w-40" 
                             min="0" 
-                            maxLength={singleGame.pay_limit}
+                            
                             {...register('pay_money'+item.code_name )}
                             onChange={(e)=> {handleChange(e,item.code_name)}}
                             
                           />
+                          <div className='text-zinc-600 text-xs flex items-center break-keep px-2 bg-gray-200'>籌 碼</div>
                           <input type="button" value="-" className=' w-8 bg-zinc-300 text-zinc-600  text-lg' 
                             onClick={()=>{
                               const values = getValues("pay_money"+item.code_name)

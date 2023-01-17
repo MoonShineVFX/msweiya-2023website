@@ -3,9 +3,11 @@ import { Navigate,Outlet} from 'react-router-dom';
 import { AuthContext } from "../Front/PlayAuthContext";
 import {getUserByPhone} from '../Helper/getfunction'
 import { RecoilRoot } from 'recoil';
+import DashboardPageLayout from './DashboardPageLayout';
 function BankLayout() {
   const { state } = useContext(AuthContext);
   const phone = window.localStorage.getItem('phone')
+  const permission = window.localStorage.getItem('permission')
   const [userData , setUserData] = useState(null)
 
 
@@ -16,7 +18,7 @@ function BankLayout() {
   },[])
 
 
-  if (!state.isLoggedIn) {
+  if (!state.isLoggedIn || permission !== 'adminer') {
     return <Navigate to="/login" />;
   }
 
@@ -24,7 +26,7 @@ function BankLayout() {
   return (
     <React.Fragment>
       <RecoilRoot>
-        <Outlet context={{userData}} />
+        <DashboardPageLayout><Outlet context={{userData}} /></DashboardPageLayout> 
       </RecoilRoot>
 
     </React.Fragment>

@@ -43,7 +43,7 @@ export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
   }
 }
 // 建立新遊戲賽局
-// 讀取遊戲賽局
+// 前台讀取遊戲賽局
 export const getAllGame = async (callback) =>{
   const q = query(collection(db, "game"), where("display", "==", '1'))
   const data = await getDocs(q);
@@ -51,6 +51,15 @@ export const getAllGame = async (callback) =>{
     callback(res)
   })
 }
+// 後台讀取遊戲賽局
+export const getAllGameForBank = async (callback) =>{
+  const q = query(collection(db, "game"))
+  const data = await getDocs(q);
+  mapDataWithUid(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
+    callback(res)
+  })
+}
+
 export const getGameByUid = async (uid,callback)=>{
   const q = doc(db , 'game' , uid)
   const docSnap = await getDoc(q);
@@ -71,7 +80,7 @@ export const getGameByGameTitle = async (u_title,callback)=>{
   //   callback(doc.data())
   // });
 }
-// 編輯
+
 // 刪除
 
 // 紀錄下注
@@ -81,8 +90,20 @@ export const updatedGameBetsByGameUid = async (uid,currentData,callback)=>{
     await updateDoc(docRef, {
       gambles_list: arrayUnion(currentData)
     });
+    callback('success')
   }catch(error){
+    callback(error)
+  }
+}
+// 編輯
+export const updatedGameByGameUid = async (uid,currentData,callback)=>{
+  const docRef = doc(db ,"game", uid)
 
+  try{
+    await updateDoc(docRef,currentData);
+    callback('success')
+  }catch(error){
+    callback(error)
   }
 }
 

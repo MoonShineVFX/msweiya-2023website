@@ -6,6 +6,7 @@ import { RecoilRoot } from 'recoil';
 function HomeLayout() {
   const { state } = useContext(AuthContext);
   const phone = window.localStorage.getItem('phone')
+  
   const [userData , setUserData] = useState(null)
 
 
