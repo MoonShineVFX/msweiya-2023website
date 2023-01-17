@@ -80,7 +80,10 @@ function TopRich() {
                       <div className=' w-4 text-sm '><span>No.</span>{index+1}</div>
                       {item.name}
                     </div>
-                    <div className='text-4xl w-1/2 text-right'>{item.coin} </div>
+                    <div className='text-4xl w-1/2 text-right flex flex-col items-end justify-end'>
+                        {item.coin} 
+                        <div className='text-sm '><span>coin</span></div>
+                    </div>
                   </div>
                 </ListItem>
 
