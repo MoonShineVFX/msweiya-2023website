@@ -17,7 +17,9 @@ function WatchGame() {
   const userRef = useRef()
   const { register, handleSubmit, watch,setValue,getValues,control,reset, formState: { errors } } = useForm();
   const handleClickRank = () =>{}
+  console.log(work.betting[2])
   const onSubmit = (data) => {
+    console.log(data)
     let currentData = []
     for(const [index, [key, value]] of Object.entries(Object.entries(data))){
       currentData.push({
@@ -59,7 +61,7 @@ function WatchGame() {
       if(oddData[0].ranking === 'no'){
         return '輸了'
       }else{
-        return betCoin+ "+" +betCoin + oddData[0].odds +" = "+  eval(betCoin+betCoin+oddData[0].odds)
+        return (betCoin+ "+" +betCoin + oddData[0].odds +" = ")+  (betCoin+eval( betCoin+oddData[0].odds))
       }
       
     } else{
