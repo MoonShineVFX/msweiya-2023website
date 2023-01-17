@@ -40,7 +40,6 @@ function Home() {
     <div className='text-white w-11/12 mx-auto my-4'>
       <UserInfo userData={userData}/>
       
-      <button className='border p-2 my-4' onClick={handleClick}> TEST +100積分(當玩家下注贏錢時，增加積分到資料庫)</button>
       <div className='mt-10'>
         <div className='text-xl text-center'>賽局清單 </div>
         {
