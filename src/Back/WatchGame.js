@@ -61,7 +61,7 @@ function WatchGame() {
       if(oddData[0].ranking === 'no'){
         return '輸了'
       }else{
-        return (betCoin+ "+" +betCoin + oddData[0].odds +" = ")+  (betCoin+eval( betCoin+oddData[0].odds))
+        return (betCoin+ "+" +betCoin + oddData[0].odds +" = ")+  ( betCoin+eval( betCoin+oddData[0].odds))
       }
       
     } else{

@@ -37,7 +37,7 @@ function WatchGame() {
     for(const [index, [key, value]] of Object.entries(Object.entries(data))){
       console.log(key, value)
         currentData.push({
-          "pay_coin" : value ,
+          "pay_coin" : parseInt(value)  ,
           "player_code":key.slice(-1),
           "user_phone":userData.phone,
           "userid": userData.uid,
