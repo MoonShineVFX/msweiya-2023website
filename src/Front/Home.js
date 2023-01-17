@@ -53,6 +53,7 @@ function Home() {
                 style={{backgroundImage: `url(${process.env.PUBLIC_URL + '/images/card.jpeg'})`}}
               >
                 <Link to={'/watchgame/' +uid } 
+                  style={(enable ==="1"? { } : {pointerEvents: "none"})}
                   onClick={()=>{
                     setSingleGame(item)
                   }}>

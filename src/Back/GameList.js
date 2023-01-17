@@ -80,7 +80,7 @@ function GameList() {
 
   },[])
   return (
-    <section className='bg-white w-full p-5'>
+    <section className='bg-white w-full p-5 min-h-screen'>
       <h1>遊戲清單</h1>
       <div id="table" className='w-full mt-5' >
         <table className="table-auto   border border-slate-200 w-full rounded-md ">
@@ -101,7 +101,7 @@ function GameList() {
                 const {uid,title,pay_limit,multiple_choice,u_title, display,enable,special_rule} =item
                 return(
                   <tr className=' hover:bg-zinc-200' key={uid}>
-                    <td className='p-2 text-xs'>{title}</td>
+                    <td className='p-2 text-xs'>{title} </td>
                     <td className='p-2 text-xs'>{pay_limit}</td>
                     <td className='p-2 text-xs'>{multiple_choice ==='1' ? '可分散多選' : '單選下注'}</td>
                     <td className='p-2 text-xs'>{display === '1' ? <span className='text-green-700'>顯示</span> : <span className='text-rose-700'>不顯示</span>}</td>

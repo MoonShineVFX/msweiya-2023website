@@ -46,9 +46,14 @@ export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
 // 前台讀取遊戲賽局
 export const getAllGame = async (callback) =>{
   const q = query(collection(db, "game"), where("display", "==", '1'))
-  const data = await getDocs(q);
-  mapDataWithUid(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
-    callback(res)
+
+  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+
+    var game = []
+    querySnapshot.forEach((doc) => {
+      game.push({...doc.data(),uid:doc.id})
+    })
+    callback(game)
   })
 }
 // 後台讀取遊戲賽局
@@ -58,6 +63,7 @@ export const getAllGameForBank = async (callback) =>{
   mapDataWithUid(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
     callback(res)
   })
+  
 }
 
 export const getGameByUid = async (uid,callback)=>{
