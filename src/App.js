@@ -17,6 +17,8 @@ import BankLayout from "./Layouts/BankLayout";
 import AdminHome from './Back/Home'
 import AdminGame from './Back/GameList'
 import AdminWatchGame from './Back/WatchGame'
+import AdminRich from "./Back/Rich";
+import AdminAward from "./Back/Award";
 
 function App() {
   return (
@@ -38,6 +40,9 @@ function App() {
               <Route path="" element={<AdminHome />} />
               <Route path="game" element={<AdminGame />} />
               <Route path="watchgame/:gameuid" element={<AdminWatchGame />} />
+              <Route path="rich" element={<AdminRich />} />
+              <Route path="award" element={<AdminAward />} />
+
             </Route>
             <Route path="rich" >
               <Route path="" element={<TopRich />} />
