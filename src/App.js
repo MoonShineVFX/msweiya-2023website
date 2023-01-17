@@ -9,7 +9,7 @@ import Login from "./Front/Login";
 import Home from "./Front/Home";
 import WatchGame from "./Front/WatchGame";
 import WatchChart from "./Front/WatchChart";
-
+import TopRich from "./Front/TopRich";
 
 //bank
 import BankLayout from "./Layouts/BankLayout";
@@ -38,7 +38,9 @@ function App() {
               <Route path="game" element={<AdminGame />} />
               <Route path="watchgame/:gameuid" element={<AdminWatchGame />} />
             </Route>
-            
+            <Route path="rich" >
+              <Route path="" element={<TopRich />} />
+            </Route>
             
         </Routes>
       </HashRouter>

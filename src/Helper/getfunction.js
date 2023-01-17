@@ -17,6 +17,23 @@ export const getAllUsers = async (callback) =>{
     callback(res)
   })
 }
+export const getAllUsersForRich = async (callback) =>{
+  const q = query(collection(db, "users"), where("display", "==", '1'))
+  const data = await getDocs(q);
+  mapDataByCoin(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
+    callback(res)
+  })
+}
+//
+export const getAllUsersRealTime = async (callback)=>{
+  const q = query(collection(db, "users"), where("display", "==", '1'))
+  const unsubscribe = onSnapshot (q, async(querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      callback({...doc.data(),uid:doc.id})
+    })
+   
+  })
+}
 //由phone取得單筆玩家
 export const getUserByPhone = async (phone,callback)=>{
   const q = query(collection(db, "users"),where("phone", "==", phone))
@@ -133,8 +150,19 @@ export const updatedGameByGameUid = async (uid,currentData,callback)=>{
 }
 
 // 輸贏選項
+//按照積分排列
+const mapDataByCoin = async (data, callback)=>{
+  let dataSorted = data.sort(function(a, b) {
+    return b.sort - a.sort;
+  });
+  let latestSortNum = (parseInt(dataSorted[0].sort_num)+1).toString()
+  const twoarr= dataSorted.map( async (element) => {
 
-
+    return {...element , latestSortNum :latestSortNum}
+   
+  })
+  callback(await Promise.all(twoarr))
+}
 
 
 
