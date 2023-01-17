@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 function AwwardCard({data,index,groupData}) {
   const [active,setActive] = useState(false)
-  console.log(groupData[index])
   return (
     <div className=' relative  w-auto h-screen my-1 flex justify-center items-center'  id={'section'+index}>
       <div className='relative  h-3/6  bg-rose-200 cursor-pointer' onClick={()=>setActive(!active)}>
