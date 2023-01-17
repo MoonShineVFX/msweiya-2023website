@@ -7,7 +7,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //components
 import EditUserForm from './Components/EditUserForm';
 //helper
-import {getAllUsers,updateUserCoinByPhone} from '../Helper/getfunction'
+import {getAllUsers,updateUserCoinByUid} from '../Helper/getfunction'
 
 function Home() {
   const [usersData, setUsersData] = useState([]);
@@ -42,7 +42,7 @@ function Home() {
       "coin":data.coin
     }
 
-    updateUserCoinByPhone(uid,currentData,function(res){
+    updateUserCoinByUid(uid,currentData,function(res){
       console.log(res)
       fetchWorkDoneFun('編輯資料失敗，錯誤訊息:',res)
 

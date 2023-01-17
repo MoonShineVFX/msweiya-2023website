@@ -1,8 +1,9 @@
 // firebase 資料庫連線
 import db from '../firebaseConfig/firebase'
-import {collection, query,onSnapshot,  getDocs,orderBy,where,limit,limitToLast,startAfter,endBefore,addDoc,deleteDoc,doc,updateDoc,getDoc,arrayUnion} from "firebase/firestore"
+import {collection, query,onSnapshot,  getDocs,orderBy,where,limit,limitToLast,startAfter,endBefore,addDoc,deleteDoc,doc,updateDoc,getDoc,arrayUnion,set} from "firebase/firestore"
 import { getStorage, ref, getDownloadURL,  } from "firebase/storage";
 import { async } from '@firebase/util';
+import { FaDove } from 'react-icons/fa';
 const storage = getStorage();
 
 
@@ -16,23 +17,27 @@ export const getAllUsers = async (callback) =>{
     callback(res)
   })
 }
-//由id取得單筆玩家
+//由phone取得單筆玩家
 export const getUserByPhone = async (phone,callback)=>{
   const q = query(collection(db, "users"),where("phone", "==", phone))
  
-  const unsubscribe = onSnapshot(q, (querySnapshot) => {
+  const unsubscribe = onSnapshot (q, async(querySnapshot) => {
     querySnapshot.forEach((doc) => {
       callback({...doc.data(),uid:doc.id})
     })
+   
   })
-  // const data = await getDocs(q);
-  // data.forEach((doc) => {
-  //   const docData = doc.data()
-  //   callback(doc.data())
-  // });
 }
+//由 id 取得單筆玩家
+export const getUserByUid = async (uid,callback)=>{
+  const q = doc(db , 'users' , uid)
+  const docSnap = await getDoc(q);
+  callback(docSnap.data())
+}
+
+
 //改變積分
-export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
+export const updateUserCoinByUid = async (uid,currentData,callback)=>{
 
   const q = doc(db, 'users',uid)
   try {
@@ -42,6 +47,7 @@ export const updateUserCoinByPhone = async (uid,currentData,callback)=>{
     callback(error)
   }
 }
+
 // 建立新遊戲賽局
 // 前台讀取遊戲賽局
 export const getAllGame = async (callback) =>{
@@ -96,6 +102,19 @@ export const updatedGameBetsByGameUid = async (uid,currentData,callback)=>{
     await updateDoc(docRef, {
       gambles_list: arrayUnion(currentData)
     });
+    callback('success')
+  }catch(error){
+    callback(error)
+  }
+}
+// 紀錄名次
+export const updatedGameRankByGameUid = async (uid,currentData,callback)=>{
+  const docRef = doc(db ,"game", uid)
+  try{
+    await updateDoc(docRef, {
+      player: currentData
+    });
+    // await docRef.set({player: {currentData}},{merge: true})
     callback('success')
   }catch(error){
     callback(error)

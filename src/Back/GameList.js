@@ -4,6 +4,7 @@ import { useRecoilState } from 'recoil';
 import { formDisplayState,formStatusState,workState } from './atoms/fromTypes';
 import { confirmAlert } from 'react-confirm-alert'; // Import
 import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
+import { Link  } from "react-router-dom";
 //components
 import EditGameForm from './Components/EditGameForm';
 //helper
@@ -117,6 +118,16 @@ function GameList() {
                       <button 
                       className='text-xs  rounded-md bg-black text-white py-2 px-6 hover:bg-slate-600 '
                       onClick={()=> {onDelete(uid)}}>刪除</button>
+                      <Link 
+                        to={'/bank/watchgame/'+uid } 
+                        className='text-xs  rounded-md bg-black text-white py-2 px-6 hover:bg-slate-600 '
+                        onClick={()=>{
+                          setSingleGame(item)
+                        }}
+                        
+                      >
+                        發獎金
+                      </Link>
 
                     </td>
                   </tr>

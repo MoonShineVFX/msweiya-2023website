@@ -58,7 +58,7 @@ function EditUserForm({handleCreateWork , handleEditWork}) {
                   type="text"
                   className="form-control block w-full px-3 py-1.5 text-base font-normal text-gray-700 bg-white bg-clip-padding border border-solid border-gray-300 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none "
                   id="exampleURL0"
-                  placeholder="單項上限"
+                  placeholder="積分籌碼"
                   {...register('coin')}
                 />
               </div>
@@ -77,20 +77,6 @@ function EditUserForm({handleCreateWork , handleEditWork}) {
                   </div>
               </div>
 
-              <div className="mb-3">
-                <label htmlFor="exampleURL0" className="form-label inline-block mb-2 text-gray-700">
-                  前台顯示 
-                  </label>
-                
-                  <div className="flex items-center mb-4">
-                      <input  id="default-radio-3" type="radio" value="1" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {...register("display")}/>
-                      <label htmlFor="default-radio-3" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">顯示此局</label>
-                  </div>
-                  <div className="flex items-center">
-                      <input  id="default-radio-4" type="radio" value="0" name="default-radio" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  {...register("display")}/>
-                      <label htmlFor="default-radio-4" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">不顯示此局</label>
-                  </div>
-              </div>
 
               
             </div>

@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react'
-import {getUserByPhone , updateUserCoinByPhone, getAllGame} from '../Helper/getfunction'
+import {getUserByPhone , updateUserCoinByUid, getAllGame} from '../Helper/getfunction'
 import { Link  } from "react-router-dom";
 import AnimatedNumbers from "react-animated-numbers";
 import UserInfo from './Components/UserInfo';
@@ -21,7 +21,7 @@ function Home() {
     let currentdata = {
       "coin" : userData.coin +100
     } 
-    updateUserCoinByPhone(userData.uid,currentdata,function(res){
+    updateUserCoinByUid(userData.uid,currentdata,function(res){
       console.log(res)
     })
   

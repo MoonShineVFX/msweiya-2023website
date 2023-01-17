@@ -15,6 +15,7 @@ import WatchChart from "./Front/WatchChart";
 import BankLayout from "./Layouts/BankLayout";
 import AdminHome from './Back/Home'
 import AdminGame from './Back/GameList'
+import AdminWatchGame from './Back/WatchGame'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
             <Route path="bank" element={<BankLayout />}>
               <Route path="" element={<AdminHome />} />
               <Route path="game" element={<AdminGame />} />
+              <Route path="watchgame/:gameuid" element={<AdminWatchGame />} />
             </Route>
             
             

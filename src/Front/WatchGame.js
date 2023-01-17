@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useParams, Link } from 'react-router-dom';
-import { getGameByUid,updatedGameBetsByGameUid,updateUserCoinByPhone} from '../Helper/getfunction'
+import { getGameByUid,updatedGameBetsByGameUid,updateUserCoinByUid} from '../Helper/getfunction'
 import PlusMinusInput from './Components/PlusMinusInput';
 import UserInfo from './Components/UserInfo';
 import {useOutletContext} from 'react-router-dom'
@@ -11,6 +11,8 @@ import { gameState } from './Components/atoms/fromTypes';
 function WatchGame() {
   const user_phone = window.localStorage.getItem('phone')
   const singleGame = useRecoilValue(gameState);
+  const [ betSuccess, setBetSuccess] = useState('')
+  const [ getPaySuccess, setGetPaySuccess] = useState('')
   const {gameuid} = useParams();
   const {userData} = useOutletContext()
   const [data , setData] = useState(null)
@@ -29,7 +31,37 @@ function WatchGame() {
 
   const onSubmit = (data) => {
     console.log(data)
+    let itemValues =  Object.values(data) 
+    let itemReduse = itemValues.reduce((a,b) => parseInt(a)  + parseInt(b) )
+    let currentData = []
+    for(const [index, [key, value]] of Object.entries(Object.entries(data))){
+      console.log(key, value)
+        currentData.push({
+          "pay_coin" : value ,
+          "player_code":key.slice(-1),
+          "user_phone":userData.phone,
+          "userid": userData.uid,
+        })
+    }
+    console.log(currentData)
+    currentData.map((item,index)=>{
+      if(item.pay_coin > 0){
+        updatedGameBetsByGameUid(gameuid,item,function(res){
+          console.log(res)
+          setBetSuccess('已經下注成功')
+        })
+      }
+    })
+    let payCoindata = {
+      "coin" : userData.coin - itemReduse
+    } 
+    updateUserCoinByUid(userData.uid,payCoindata,function(res){
+      console.log(res)
+      setGetPaySuccess('已經扣款成功')
+    })
   }
+
+  //暫時沒用到
   const handleInputClick = (items) => {
     //需要拆出單項 再記錄到下注單
     let currentData = {
@@ -44,7 +76,7 @@ function WatchGame() {
     let payCoindata = {
       "coin" : userData.coin - items.pay_money
     } 
-    updateUserCoinByPhone(userData.uid,payCoindata,function(res){
+    updateUserCoinByUid(userData.uid,payCoindata,function(res){
       console.log(res)
     })
 
@@ -136,6 +168,10 @@ function WatchGame() {
             <div>
               <div className='text-xl font-extrabold'>下注區</div> 
               <div className='text-zinc-400'>謹慎博弈 小賭怡情 大賭傷身 </div>
+              <div className='text-rose-500'>
+                <div>{betSuccess}</div>
+                <div>{getPaySuccess}</div>
+              </div>
 
             </div>
             <div className='flex text-sm gap-5 mt-10  justify-center'>
