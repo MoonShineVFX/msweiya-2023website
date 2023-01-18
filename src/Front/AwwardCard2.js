@@ -26,7 +26,7 @@ function AwwardCard2({data,index,groupData}) {
           onClick={()=>setSecondActive(!secondActive)}
         >
           <div className='border h-full rounded-md border-zinc-600 border-dashed  text-black flex justify-center items-center  flex-wrap px-4 overflow-hidden overflow-y-auto'>
-            <div className={'  mx-auto flex flex-wrap transition-all duration-1000' + (secondActive ? '  opacity-100 ' : '   opacity-0')}>
+            <div className={'  mx-auto flex flex-col transition-all duration-1000' + (secondActive ? '  opacity-100 ' : '   opacity-0')}>
               {
                 groupData&&
                 groupData[index].map((item,index)=>{
