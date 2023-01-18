@@ -64,7 +64,16 @@ export const updateUserCoinByUid = async (uid,currentData,callback)=>{
     callback(error)
   }
 }
-
+export const deleteUser = async(uid,callback)=>{
+  const workDoc = doc(db , 'users' , uid)
+  
+  try {
+    await deleteDoc(workDoc)
+    callback('success')
+  } catch (error) {
+    callback(error)
+  }
+}
 // 建立新遊戲賽局
 // 前台讀取遊戲賽局
 export const getAllGame = async (callback) =>{

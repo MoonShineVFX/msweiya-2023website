@@ -7,7 +7,7 @@ import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 //components
 import EditUserForm from './Components/EditUserForm';
 //helper
-import {getAllUsers,updateUserCoinByUid} from '../Helper/getfunction'
+import {getAllUsers,updateUserCoinByUid,deleteUser} from '../Helper/getfunction'
 
 function Home() {
   const [usersData, setUsersData] = useState([]);
@@ -20,9 +20,9 @@ function Home() {
       buttons: [
         {
           label: '確定',
-          // onClick: () =>  deleteWork(uid,function(res){
-          //   fetchWorkDoneFun('刪除資料失敗，錯誤訊息:',res)
-          // })
+          onClick: () =>  deleteUser(uid,function(res){
+            fetchWorkDoneFun('刪除資料失敗，錯誤訊息:',res)
+          })
         },
         {
           label: '取消',
