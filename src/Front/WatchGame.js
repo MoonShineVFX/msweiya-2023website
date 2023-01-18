@@ -93,9 +93,6 @@ function WatchGame() {
       buttons: [
         {
           label: '確定',
-        },
-        {
-          label: '取消',
         }
       ]
     });
@@ -209,7 +206,7 @@ function WatchGame() {
         data &&
         
         <div>
-          <div className='flex flex-col justify-between my-4 items-center border-b border-zinc-400 pb-4'>
+          <div className='flex flex-col justify-between my-4 items-center border-b border-zinc-500 pb-2'>
             <div 
             className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-xl' 
             >{data.title}</div>
@@ -223,12 +220,11 @@ function WatchGame() {
               <div className='text-xl font-extrabold'>下注區</div> 
               <div className='text-zinc-400'>謹慎博弈 小賭怡情 大賭傷身 </div>
               <div className='text-rose-500'>
-                <div>{betSuccess}</div>
-                <div>{getPaySuccess}</div>
+                <div>{betSuccess} {getPaySuccess}</div>
               </div>
 
             </div>
-            <div className='flex text-sm gap-5 mt-10  justify-center'>
+            <div className='flex text-sm gap-5 mt-3  justify-center'>
               <div className='flex'> 現在{data.enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
               <div>單項下注上限 {data.pay_limit} 籌碼</div>
               {/* <div>你已下注 {currentUserBet} 籌碼</div> */}
