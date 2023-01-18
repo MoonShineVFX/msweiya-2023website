@@ -6,7 +6,7 @@ function UserInfo({userData}) {
     <div className='my-4'>
       {
         userData &&
-          <div className='p-5 rounded-lg border-2'>
+          <div className='p-5 rounded-lg border-2 '>
             <div className='flex justify-between'>
               <div>玩家姓名：</div> <div>{userData.name}</div>
             </div>
@@ -24,7 +24,7 @@ function UserInfo({userData}) {
                   }}
                 ></AnimatedNumbers>  */}
                {userData.coin}
-                coin</div>
+                 coin </div>
             </div>
             
             
