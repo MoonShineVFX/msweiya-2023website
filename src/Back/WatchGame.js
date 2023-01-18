@@ -131,7 +131,7 @@ function WatchGame() {
             <tr>
               <th className='bg-zinc-100 border-b border-zinc-300 text-left'>挑戰者</th>
               <th className='bg-zinc-100 border-b border-zinc-300 text-left'>設定名次</th>
-              <th className='bg-zinc-100 border-b border-zinc-300 text-left'>賠率</th>
+              <th className='bg-zinc-100 border-b border-zinc-300 text-left'>賠率(要按確定名次才會算賠率)</th>
             </tr>
           </thead>
           
