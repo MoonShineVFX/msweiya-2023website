@@ -18,7 +18,7 @@ export const getAllUsers = async (callback) =>{
   })
 }
 export const getAllUsersForRich = async (callback) =>{
-  const q = query(collection(db, "users"), where("display", "==", '1'))
+  const q = query(collection(db, "users"), where("exception", "==", '0'))
   const data = await getDocs(q);
   mapDataByCoin(data.docs.map(doc=> ({...doc.data(),uid:doc.id})),function(res){
     callback(res)

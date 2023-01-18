@@ -39,7 +39,8 @@ function Home() {
     let currentData ={
       "name": data.name,
       "permission":data.permission,
-      "coin":data.coin
+      "coin":data.coin,
+      "exception":data.exception ? data.exception : "0"
     }
 
     updateUserCoinByUid(uid,currentData,function(res){
@@ -87,7 +88,7 @@ function Home() {
         <table className="table-auto   border border-slate-200 w-full rounded-md ">
           <thead>
             <tr>
-              <th className='bg-zinc-100 border-b border-zinc-300 text-left'>登入</th>
+              <th className='bg-zinc-100 border-b border-zinc-300 text-left'>例外</th>
               <th className='bg-zinc-100 border-b border-zinc-300 text-left'>玩家名</th>
               <th className='bg-zinc-100 border-b border-zinc-300 text-left'>手機號碼</th>
               <th className='bg-zinc-100 border-b border-zinc-300 text-left'>積分點</th>
@@ -100,10 +101,10 @@ function Home() {
             {
               usersData ?
               usersData.map((item,index)=>{
-                const {uid,coin, display, name, phone,enable,real_money,first_Login,permission} =item
+                const {uid,coin, display, name, phone,enable,real_money,first_Login,permission,exception} =item
                 return(
                   <tr className=' hover:bg-zinc-200' key={uid}>
-                    <td className='p-2 text-xs'>{first_Login === '1' ? '已加入' : '0'}</td>
+                    <td className='p-2 text-xs'>{exception === '1' ?  <div className='text-rose-700 font-bold'>已排除</div>:exception}</td>
                     <td className='p-2 text-xs'>{name} ( {permission} )</td>
                     <td className='p-2 text-xs'>{phone}</td>
                     <td className='p-2 text-xs'>{coin}</td>

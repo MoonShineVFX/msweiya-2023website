@@ -76,6 +76,20 @@ function EditUserForm({handleCreateWork , handleEditWork}) {
                       <label htmlFor="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">玩家</label>
                   </div>
               </div>
+              <div className="mb-3">
+                <label htmlFor="multiple_choice" className="form-label inline-block mb-2 text-gray-700">
+                  排除我 
+                  </label>
+                
+                  <div className="flex items-center mb-4">
+                      <input  id="default-radio-1" type="radio" value="1"  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" {...register("exception")}/>
+                      <label htmlFor="default-radio-1" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">排除</label>
+                  </div>
+                  <div className="flex items-center">
+                      <input  id="default-radio-2" type="radio" value="0"  className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"  {...register("exception")}/>
+                      <label htmlFor="default-radio-2" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">不排除</label>
+                  </div>
+              </div>
 
 
               
@@ -94,7 +108,7 @@ function EditUserForm({handleCreateWork , handleEditWork}) {
               <button type="submit" className="py-2 px-4 bg-black text-white  rounded-md" >
                 新增作品<input type="hidden" value="ADD"  {...register('method')}/></button>
             }
-            <div className='text-xs inline-block ml-3' >縮圖請建立作品後再上傳</div>
+            <div className='text-xs inline-block ml-3' ></div>
           </div>
         
         </form>
