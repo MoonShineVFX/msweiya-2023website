@@ -17,7 +17,10 @@ function AwwardCard({data,index,groupData}) {
               groupData&&
               groupData[index].map((item,index)=>{
                 return(
-                  <div key={'user'+index} className="text-2xl break-keep">{item.name}</div>
+                  <div key={'user'+index} className="text-2xl break-keep text-right">
+                      {item.name}
+                      <div className='text-sm text-zinc-400'>{item.coin}</div>
+                  </div>
                 )
               })
             }
