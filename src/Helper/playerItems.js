@@ -27,3 +27,15 @@ export const awardData=[
   {level:"走路工",    bounty:1000,    quota:51 ,bgimage:"bg08.jpeg"},
   {level:"參加獎",      bounty:1000,    quota:14 ,bgimage:"bg09.jpeg"}
 ]
+
+export const awardData2=[
+  {level:"尊爵榮譽",  bounty:30000,   quota:5  ,bgimage:"sbg01.jpeg"},
+  {level:"白金榮耀",  bounty:20000,   quota:10 ,bgimage:"sbg02.jpeg"},
+  {level:"金鑽精英",  bounty:10000,   quota:15 ,bgimage:"sbg03.jpeg"},
+  {level:"銀級幹部",  bounty:5000,    quota:20 ,bgimage:"sbg04.jpeg"},
+  {level:"三級黨員",  bounty:4000,    quota:25 ,bgimage:"sbg05.jpeg"},
+  {level:"二級黨員",  bounty:3000,    quota:30 ,bgimage:"sbg06.jpeg"},
+  {level:"一級黨員",  bounty:2000,    quota:35 ,bgimage:"sbg07.jpeg"},
+  {level:"走路工",    bounty:1000,    quota:51 ,bgimage:"sbg08.jpeg"},
+  {level:"參加獎",      bounty:1000,    quota:14 ,bgimage:"sbg09.jpeg"}
+]

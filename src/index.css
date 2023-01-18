@@ -5,7 +5,7 @@
 
 body{
   background: #0D0D0D;
-  font-family: arial,"Microsoft JhengHei","微軟正黑體",sans-serif !important;
+  font-family: 'Noto Sans TC', sans-serif !important;
 }
 
 input.loginInput {
@@ -51,7 +51,7 @@ input.gameNumber{
   box-shadow: 0 19px 38px rgba(0,0,0,0.60), 0 15px 12px rgba(0,0,0,0.40);
 }
 .text6 {
-  text-shadow: 0 13.36px 8.896px #483d2c, 0 -2px 1px #ffffae;
+  text-shadow: 0 13.36px 8.896px #483d2c, 0 -2px 1px #dfca9e;
  letter-spacing: -4px;
- color: #b39d6f;
+ color: #bba26c;
 }
