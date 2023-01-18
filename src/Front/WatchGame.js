@@ -8,6 +8,8 @@ import { useForm,useWatch } from 'react-hook-form';
 import { FaFlagCheckered } from "react-icons/fa";
 import { useRecoilState, useRecoilValue } from 'recoil';
 import { gameState } from './Components/atoms/fromTypes';
+import { confirmAlert } from 'react-confirm-alert'; // Import
+import 'react-confirm-alert/src/react-confirm-alert.css'; // Import css
 function WatchGame() {
   const user_phone = window.localStorage.getItem('phone')
   const singleGame = useRecoilValue(gameState);
@@ -30,9 +32,15 @@ function WatchGame() {
   }});
 
   const onSubmit = (data) => {
+    
     console.log(data)
     let itemValues =  Object.values(data) 
     let itemReduse = itemValues.reduce((a,b) => parseInt(a)  + parseInt(b) )
+    if(itemReduse > userData.coin) {
+      stopPlay('超過你的本金，不能下注喔')
+      return
+    }
+    // confirmBet('下好離手，起手無回')
     let currentData = []
     for(const [index, [key, value]] of Object.entries(Object.entries(data))){
       console.log(key, value)
@@ -44,22 +52,68 @@ function WatchGame() {
         })
     }
     console.log(currentData)
-    currentData.map((item,index)=>{
-      if(item.pay_coin > 0){
-        updatedGameBetsByGameUid(gameuid,item,function(res){
-          console.log(res)
-          setBetSuccess('已經下注成功')
-        })
-      }
-    })
-    let payCoindata = {
-      "coin" : userData.coin - itemReduse
-    } 
-    updateUserCoinByUid(userData.uid,payCoindata,function(res){
-      console.log(res)
-      setGetPaySuccess('已經扣款成功')
-    })
+    confirmAlert({
+      title: '下好離手，起手無回',
+      buttons: [
+        {
+          label: '確定',
+          onClick: () => {
+            currentData.map((item,index)=>{
+              if(item.pay_coin > 0){
+                updatedGameBetsByGameUid(gameuid,item,function(res){
+                  console.log(res)
+                  setBetSuccess('已經下注成功')
+                })
+              }
+            })
+            let payCoindata = {
+              "coin" : userData.coin - itemReduse
+            } 
+            updateUserCoinByUid(userData.uid,payCoindata,function(res){
+              console.log(res)
+              setGetPaySuccess('已經扣款成功')
+            })
+          }
+        },
+        {
+          label: '取消',
+          onClick: ()=>{
+            currentData = []
+          }
+        }
+      ]
+    });
+    
+    
+    
   }
+  const stopPlay = (msg) =>{
+    confirmAlert({
+      title: msg,
+      buttons: [
+        {
+          label: '確定',
+        },
+        {
+          label: '取消',
+        }
+      ]
+    });
+  }
+  const confirmBet = (msg)=>{
+    confirmAlert({
+      title: msg,
+      buttons: [
+        {
+          label: '確定',
+        },
+        {
+          label: '取消',
+        }
+      ]
+    });
+  }
+  
 
   //暫時沒用到
   const handleInputClick = (items) => {
