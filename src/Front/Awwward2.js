@@ -65,7 +65,7 @@ function Awwward2() {
           )
         })
        }
-       <div className='border px-1 py-1' onClick={getAllLevelData}>計算業績</div>
+       <div className='border px-1 py-1' onClick={fetchData}>刷新計算業績</div>
       </div>
       <div className=' relative  w-10/12  mx-auto flex flex-col '>
         {awardData2.map((item,index)=>{
