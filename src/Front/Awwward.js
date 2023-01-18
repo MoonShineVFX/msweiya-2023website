@@ -1,9 +1,9 @@
 import React,{useEffect,useState} from 'react'
 import AwwardCard from './AwwardCard'
 import {Link} from 'react-scroll'
+import { joinPlayer,awardData} from '../Helper/playerItems'
 //helper
 import {getAllUsersForRich,getAllUsersRealTime} from '../Helper/getfunction'
-import { joinPlayer } from '../Helper/playerItems'
 function Awwward() {
   const [currentList, setCurrentList] = useState(null)
   const [groupData, seGroupData] = useState(null)
@@ -12,21 +12,22 @@ function Awwward() {
     getAllUsersForRich((res)=>{
       const sortData = res.sort((a,b)=> b.coin - a.coin)
       setCurrentList(sortData)
+      getAllLevelData(sortData)
     })
     
   }
 
-  const getAllLevelData = ()=>{
+  const getAllLevelData = (sortData)=>{
     let newArray = []
-    const level01 = currentList.slice(0,5)
-    const level02 = currentList.slice(6,16)
-    const level03 = currentList.slice(17,32)
-    const level04 = currentList.slice(33,53)
-    const level05 = currentList.slice(54,79)
-    const level06 = currentList.slice(80,110)
-    const level07 = currentList.slice(111,146)
-    const level08 = currentList.slice(147,198)
-    const level09 = currentList.slice(199,213)
+    const level01 = sortData.slice(0,5)
+    const level02 = sortData.slice(6,16)
+    const level03 = sortData.slice(17,32)
+    const level04 = sortData.slice(33,53)
+    const level05 = sortData.slice(54,79)
+    const level06 = sortData.slice(80,110)
+    const level07 = sortData.slice(111,146)
+    const level08 = sortData.slice(147,198)
+    const level09 = sortData.slice(199,213)
     newArray.push(level01)
     newArray.push(level02)
     newArray.push(level03)
@@ -49,21 +50,9 @@ function Awwward() {
   //  setLevel9(level09)
     
   }
-  const awardData=[
-    {level:"尊爵榮譽",  bounty:30000,   quota:5  ,bgimage:"bg01.jpeg"},
-    {level:"白金榮耀",  bounty:20000,   quota:10 ,bgimage:"bg02.jpeg"},
-    {level:"金鑽精英",  bounty:10000,   quota:15 ,bgimage:"bg03.jpeg"},
-    {level:"銀級幹部",  bounty:5000,    quota:20 ,bgimage:"bg04.jpeg"},
-    {level:"三級黨員",  bounty:4000,    quota:25 ,bgimage:"bg05.jpeg"},
-    {level:"二級黨員",  bounty:3000,    quota:30 ,bgimage:"bg06.jpeg"},
-    {level:"一級黨員",  bounty:2000,    quota:35 ,bgimage:"bg07.jpeg"},
-    {level:"走路工",    bounty:1000,    quota:51 ,bgimage:"bg08.jpeg"},
-    {level:"參加獎",      bounty:1000,    quota:14 ,bgimage:"bg09.jpeg"}
-  ]
+
   useEffect(()=>{
-
       fetchData()
-
   },[])
   console.log(currentList)
   return (

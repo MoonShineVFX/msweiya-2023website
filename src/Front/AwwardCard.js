@@ -11,7 +11,7 @@ function AwwardCard({data,index,groupData}) {
           style={{backgroundImage : `url(${process.env.PUBLIC_URL+'/images/'+ data.bgimage})`}}
         > 
           
-          <div className='text-white text-[8rem] font-extrabold absolute bottom-5 left-5 text6'>{data.level}</div>
+          <div className='text-white text-[7rem] w-full text-center font-extrabold absolute top-[50%] left-[50%] -translate-x-[50%] -translate-y-[50%] text6'>{data.level}</div>
         </div>
         <div 
           id="bottom"
