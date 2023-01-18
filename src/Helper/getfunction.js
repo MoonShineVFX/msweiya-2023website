@@ -148,6 +148,17 @@ export const updatedGameByGameUid = async (uid,currentData,callback)=>{
     callback(error)
   }
 }
+export const updateGameUserHavePlay  = async (uid,currentData,callback)=>{
+  const docRef = doc(db ,"game", uid)
+  try{
+    await updateDoc(docRef, {
+      haveplay_list: arrayUnion(currentData)
+    });
+    callback('success')
+  }catch(error){
+    callback(error)
+  }
+}
 
 // 輸贏選項
 //按照積分排列

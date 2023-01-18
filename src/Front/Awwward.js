@@ -14,6 +14,22 @@ function Awwward() {
     })
     
   }
+  const joinPlayer = [
+    {name:"陳映璇"}, 
+    {name:"宋書瑜"}, 
+    {name:"王昱涵"}, 
+    {name:"李浚瑋"}, 
+    {name:"李鼎昱"}, 
+    {name:"李佳霖"}, 
+    {name:"張瀚文"}, 
+    {name:"李易儒"}, 
+    {name:"石仲豪"}, 
+    {name:"蘇子涵"}, 
+    {name:"王伊屏"}, 
+    {name:"黃思豪"}, 
+    {name:"陳傳融"},
+    {name:"吳品興"}, 
+  ]
   const getAllLevelData = ()=>{
     let newArray = []
     const level01 = currentList.slice(0,5)
@@ -33,7 +49,7 @@ function Awwward() {
     newArray.push(level06)
     newArray.push(level07)
     newArray.push(level08)
-    newArray.push(level09)
+    newArray.push(joinPlayer)
     console.log(newArray)
     seGroupData(newArray)
   //  setLevel1(level01)
@@ -56,7 +72,7 @@ function Awwward() {
     {level:"二級黨員",  bounty:3000,    quota:30 ,bgimage:"bg06.jpeg"},
     {level:"一級黨員",  bounty:2000,    quota:35 ,bgimage:"bg07.jpeg"},
     {level:"走路工",    bounty:1000,    quota:51 ,bgimage:"bg08.jpeg"},
-    {level:"外包",      bounty:1000,    quota:14 ,bgimage:"bg09.jpeg"}
+    {level:"參加獎",      bounty:1000,    quota:14 ,bgimage:"bg09.jpeg"}
   ]
   useEffect(()=>{
 

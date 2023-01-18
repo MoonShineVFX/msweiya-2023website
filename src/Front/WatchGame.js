@@ -1,6 +1,6 @@
 import React,{useEffect,useState} from 'react'
 import { useParams, Link } from 'react-router-dom';
-import { getGameByUid,updatedGameBetsByGameUid,updateUserCoinByUid} from '../Helper/getfunction'
+import { getGameByUid,updatedGameBetsByGameUid,updateUserCoinByUid,updateGameUserHavePlay} from '../Helper/getfunction'
 import PlusMinusInput from './Components/PlusMinusInput';
 import UserInfo from './Components/UserInfo';
 import {useOutletContext} from 'react-router-dom'
@@ -17,7 +17,7 @@ function WatchGame() {
   const [ getPaySuccess, setGetPaySuccess] = useState('')
   const {gameuid} = useParams();
   const {userData} = useOutletContext()
-  const [data , setData] = useState(null)
+  const [gameData , setGameData] = useState(null)
   const [currentUserBet , setCurrentUserBet] = useState(0)
   const [isCanBet , setIsCanBet] = useState(false)
   const { register, handleSubmit, watch,setValue,getValues,control,reset, formState: { errors } } = useForm({ defaultValues:{
@@ -32,8 +32,9 @@ function WatchGame() {
   }});
 
   const onSubmit = (data) => {
-    
+    console.log(userData)
     console.log(data)
+
     let itemValues =  Object.values(data) 
     let itemReduse = itemValues.reduce((a,b) => parseInt(a)  + parseInt(b) )
     if(itemReduse > userData.coin) {
@@ -72,6 +73,9 @@ function WatchGame() {
             updateUserCoinByUid(userData.uid,payCoindata,function(res){
               console.log(res)
               setGetPaySuccess('已經扣款成功')
+            })
+            updateGameUserHavePlay(gameuid,userData.phone,function(res){
+              console.log(res)
             })
           }
         },
@@ -185,7 +189,7 @@ function WatchGame() {
       if(!gameuid) return
 
       getGameByUid(gameuid,function(res){
-        setData(res)
+        setGameData(res)
         console.log(res)
       })
       // const watchAll = watch((value, { name, type }) => {
@@ -203,14 +207,14 @@ function WatchGame() {
     <div className='text-white w-11/12 mx-auto my-4'>
       <UserInfo userData={userData}/>
       {
-        data &&
+        gameData &&
         
         <div>
           <div className='flex flex-col justify-between my-4 items-center border-b border-zinc-500 pb-2'>
             <div 
             className='bg-clip-text text-transparent bg-gradient-to-b from-amber-100 to-amber-600 font-bold text-xl' 
-            >{data.title}</div>
-            <div className='text-sm text-amber-100'>{data.multiple_choice === "1" ?  " 可分散下注" : " 單選下注"}</div>
+            >{gameData.title}</div>
+            <div className='text-sm text-amber-100'>{gameData.multiple_choice === "1" ?  " 可分散下注" : " 單選下注"}</div>
             
           </div>
 
@@ -225,15 +229,15 @@ function WatchGame() {
 
             </div>
             <div className='flex text-sm gap-5 mt-3  justify-center'>
-              <div className='flex'> 現在{data.enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
-              <div>單項下注上限 {data.pay_limit} 籌碼</div>
+              <div className='flex'> 現在{gameData.enable ==="1"? <div className='text-green-500'> 可下注</div> : <div className='text-rose-600'> 停止下注</div>}</div>
+              <div>單項下注上限 {gameData.pay_limit} 籌碼</div>
               {/* <div>你已下注 {currentUserBet} 籌碼</div> */}
             </div>
             { isCanBet && <div className='text-rose-300 text-sm my-2'>拍謝，再點就超過超過下注限制了唷</div>}
             <div className='p-5 rounded-lg border-2 my-4'>
               <form onSubmit={handleSubmit(onSubmit)} >
               {
-                data.player.map((item,index)=>{
+                gameData.player.map((item,index)=>{
                   return(
                      <div className=' text-sm  my-4 ' key={'input'+item.code_name}>
                        <div className='flex gap-2 items-center justify-center'>
@@ -317,6 +321,7 @@ function WatchGame() {
                 })
 
               }
+              
               <div>
                 <button type="submit" 
                 className="py-1 px-2 text-white w-1/2 rounded-md text-base tracking-wider my-3 "
