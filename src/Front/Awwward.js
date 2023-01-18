@@ -1,8 +1,9 @@
-import React,{useEffect, useRef,useState} from 'react'
+import React,{useEffect,useState} from 'react'
 import AwwardCard from './AwwardCard'
 import {Link} from 'react-scroll'
 //helper
 import {getAllUsersForRich,getAllUsersRealTime} from '../Helper/getfunction'
+import { joinPlayer } from '../Helper/playerItems'
 function Awwward() {
   const [currentList, setCurrentList] = useState(null)
   const [groupData, seGroupData] = useState(null)
@@ -14,22 +15,7 @@ function Awwward() {
     })
     
   }
-  const joinPlayer = [
-    {name:"陳映璇"}, 
-    {name:"宋書瑜"}, 
-    {name:"王昱涵"}, 
-    {name:"李浚瑋"}, 
-    {name:"李鼎昱"}, 
-    {name:"李佳霖"}, 
-    {name:"張瀚文"}, 
-    {name:"李易儒"}, 
-    {name:"石仲豪"}, 
-    {name:"蘇子涵"}, 
-    {name:"王伊屏"}, 
-    {name:"黃思豪"}, 
-    {name:"陳傳融"},
-    {name:"吳品興"}, 
-  ]
+
   const getAllLevelData = ()=>{
     let newArray = []
     const level01 = currentList.slice(0,5)
