@@ -44,7 +44,7 @@ function Award() {
     <section className='bg-white w-full p-5 min-h-screen'>
       <div className='flex items-center gap-3'>
         
-        <div className='border p-3 bg-slate-300 rounded-md hover:bg-slate-400 cursor-pointer' onClick={getAllLevelData}>刷新排名</div>
+        <div className='border p-3 bg-slate-300 rounded-md hover:bg-slate-400 cursor-pointer' onClick={fetchData}>刷新排名</div>
         <div>前台網址 https://web-msweiya2023.web.app/#/award</div> 
       </div>
 
