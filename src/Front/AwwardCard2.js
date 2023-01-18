@@ -20,7 +20,7 @@ function AwwardCard2({data,index,groupData}) {
         </div>
         <div 
           id="bottom"
-          className={'bg--100 absolute p-6 h-full aspect-[8/12] rounded-md  bg-cover bg-no-repeat bg-center z-0 left-[50%]   transition-all '+ (active ? ' -translate-x-[15%] ' : '  -translate-x-[48%]  translate-y-[1%]')}
+          className={'bg--100 absolute p-6 h-full aspect-[8/12] rounded-md  bg-cover bg-no-repeat bg-center z-0 left-[50%]   transition-all duration-700 '+ (active ? ' -translate-x-[15%] ' : '  -translate-x-[48%]  translate-y-[1%]')}
           style={{background:`radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
           radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)`}}
           onClick={()=>setSecondActive(!secondActive)}
