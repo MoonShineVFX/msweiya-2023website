@@ -3,7 +3,12 @@ import React, { useState } from 'react'
 function AwwardCard2({data,index,groupData}) {
   const [active,setActive] = useState(false)
   const [secondActive,setSecondActive] = useState(false)
-  return (
+  const thousand = val =>{
+    if(!val) return
+    let str = val + ''
+    return str.replace(/\d{1,3}(?=(\d{3})+(\. \d*)?$)/g, '$&,')
+  }
+   return (
     <div className=' relative  w-auto h-screen my-1 flex justify-center items-center'  id={'section'+index}>
       <div className='relative  h-4/6  bg-rose-200 cursor-pointer' >
         <div 
@@ -20,13 +25,18 @@ function AwwardCard2({data,index,groupData}) {
         </div>
         <div 
           id="bottom"
-          className={'bg--100 absolute p-6 h-full aspect-[8/12] rounded-md  bg-cover bg-no-repeat bg-center z-0 left-[50%]   transition-all duration-700 '+ (active ? ' -translate-x-[15%] ' : '  -translate-x-[48%]  translate-y-[1%]')}
+          className={'bg--100 absolute py-8 px-6 h-full aspect-[8/12] rounded-md  bg-cover bg-no-repeat bg-center z-0 left-[50%]   transition-all duration-700 '+ (active ? ' -translate-x-[15%] ' : '  -translate-x-[48%]  translate-y-[1%]')}
           style={{background:`radial-gradient(ellipse farthest-corner at right bottom, #FEDB37 0%, #FDB931 8%, #9f7928 30%, #8A6E2F 40%, transparent 80%),
           radial-gradient(ellipse farthest-corner at left top, #FFFFFF 0%, #FFFFAC 8%, #D1B464 25%, #5d4a1f 62.5%, #5d4a1f 100%)`}}
           onClick={()=>setSecondActive(!secondActive)}
         >
           <div className='border h-full rounded-md border-zinc-600 border-dashed  text-black flex justify-center items-center  flex-wrap px-4 overflow-hidden overflow-y-auto'>
+            
             <div className={'  mx-auto flex flex-col transition-all duration-1000' + (secondActive ? '  opacity-100 ' : '   opacity-0')}>
+              <div className='   font-bold text-white drop-shadow-xl my-4'>
+                <div className='text-base'>每人獎金</div>
+                <div className='text-4xl font-extrabold'>{thousand(data.bounty)} 元</div> 
+              </div>
               {
                 groupData&&
                 groupData[index].map((item,index)=>{
