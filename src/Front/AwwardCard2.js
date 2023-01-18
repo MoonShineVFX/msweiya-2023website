@@ -32,22 +32,25 @@ function AwwardCard2({data,index,groupData}) {
         >
           <div className='border h-full rounded-md border-zinc-600 border-dashed  text-black flex justify-center items-center  flex-wrap px-4 overflow-hidden overflow-y-auto'>
             
-            <div className={'  mx-auto flex flex-col transition-all duration-1000' + (secondActive ? '  opacity-100 ' : '   opacity-0')}>
+            <div className={'  mx-auto flex flex-col transition-all duration-1000 justify-start items-center h-full' + (secondActive ? '  opacity-100 ' : '   opacity-0')}>
               <div className='   font-bold text-white drop-shadow-xl my-4'>
                 <div className='text-base'>每人獎金</div>
                 <div className='text-4xl font-extrabold'>{thousand(data.bounty)} 元</div> 
               </div>
-              {
-                groupData&&
-                groupData[index].map((item,index)=>{
-                  return(
-                    <div key={'user'+index} className="text-3xl break-keep font-bold text-white  drop-shadow-xl p-1 relative">
-                      <div className='text-right'> {item.name}</div>
-                      <div className='text-xs font-thin text-zinc-600 text-right -mb-2 '>{item.coin} coin</div>
-                    </div>
-                  )
-                })
-              }
+              <div className=' grid grid-cols-3 '>
+                {
+                  groupData&&
+                  groupData[index].map((item,index)=>{
+                    return(
+                      <div key={'user'+index} className="text-3xl break-keep font-bold text-white  drop-shadow-xl p-1 relative">
+                        <div className='text-right'> {item.name}</div>
+                        <div className='text-xs font-thin text-zinc-600 text-right -mb-2 '>{item.coin} coin</div>
+                      </div>
+                    )
+                  })
+                }
+              </div>
+
             </div>
 
 
