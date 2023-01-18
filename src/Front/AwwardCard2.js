@@ -13,7 +13,7 @@ function AwwardCard2({data,index,groupData}) {
       <div className='relative  h-4/6  bg-rose-200 cursor-pointer' >
         <div 
           id="top" 
-          className={'card-5 bg-white absolute h-full aspect-[8/12] rounded-md bg-cover bg-no-repeat bg-center z-10 left-[50%] transition-all duration-700 ' + (active ? ' -translate-x-[110%] -translate-y-[10%] -rotate-12 ' : '  -translate-x-[50%]')}
+          className={'card-5 hover:brightness-150 hover:shadow-[0_35px_60px_15px_rgba(255,255,255,0.3)] bg-white absolute h-full aspect-[8/12] rounded-md bg-cover bg-no-repeat bg-center z-10 left-[50%] transition-all duration-700 ' + (active ? ' -translate-x-[110%] -translate-y-[10%] -rotate-12 ' : '  -translate-x-[50%]')}
           style={{backgroundImage : `url(${process.env.PUBLIC_URL+'/images/'+ data.bgimage})`}}
           onClick={()=>setActive(!active)}
         > 
